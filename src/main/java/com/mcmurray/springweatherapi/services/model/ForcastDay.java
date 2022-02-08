@@ -13,9 +13,9 @@ public class ForcastDay implements Serializable {
   private Double windSpeedMPH;
   private String windDirection;
   private String date;
-  private Long zipCode;
+  private String zipCode;
 
-  public ForcastDay(Double minTemp, Double maxTemp, Double humidity, Double windSpeedMPH, String windDirection, String date, Long zipCode) {
+  public ForcastDay(Double minTemp, Double maxTemp, Double humidity, Double windSpeedMPH, String windDirection, String date, String zipCode) {
     this.minTemp = minTemp;
     this.maxTemp = maxTemp;
     this.humidity = humidity;
@@ -73,11 +73,11 @@ public class ForcastDay implements Serializable {
     this.date = date;
   }
 
-  public Long getZipCode() {
+  public String getZipCode() {
     return zipCode;
   }
 
-  public void setZipCode(Long zipCode) {
+  public void setZipCode(String zipCode) {
     this.zipCode = zipCode;
   }
 

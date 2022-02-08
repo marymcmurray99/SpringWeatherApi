@@ -55,7 +55,7 @@ public class CurrentWeatherDataService implements WeatherService{
                       root.path("main").path("humidity").asDouble(),
                       root.path("visibility").asDouble(),
                       BigDecimal.valueOf(root.path("wind").path("speed").asDouble()),
-                      Long.valueOf(zipcode));
+                      zipcode);
     } catch (JsonProcessingException e) {
       throw new RuntimeException("Error parsing current weather data json", e);
     }

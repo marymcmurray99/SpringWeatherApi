@@ -59,7 +59,7 @@ public class WeatherForcastService implements WeatherService{
                 root.path(i).path("windSpeedMPH").asDouble(),
                 root.path(i).path("windDir").textValue(),
                 root.path(i).path("validTime").textValue(),
-                Long.valueOf(zipcode)));
+                zipcode));
       }
       return forcast;
     } catch (JsonProcessingException e) {

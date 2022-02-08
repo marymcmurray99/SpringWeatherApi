@@ -15,10 +15,10 @@ public class CurrentWeather {
   private Double humidity;
   private Double visibility;
   private BigDecimal windSpeed;
-  private Long zipcode;
+  private String zipcode;
 
 
-  public CurrentWeather(BigDecimal temperature, BigDecimal feelsLike, BigDecimal tempMin, BigDecimal tempMax, Double pressure, Double humidity, Double visibility, BigDecimal windSpeed, Long zipcode) {
+  public CurrentWeather(BigDecimal temperature, BigDecimal feelsLike, BigDecimal tempMin, BigDecimal tempMax, Double pressure, Double humidity, Double visibility, BigDecimal windSpeed, String zipcode) {
     this.temperature = temperature;
     this.feelsLike = feelsLike;
     this.tempMin = tempMin;
@@ -94,11 +94,11 @@ public class CurrentWeather {
     this.windSpeed = windSpeed;
   }
 
-  public Long getZipcode() {
+  public String getZipcode() {
     return zipcode;
   }
 
-  public void setZipcode(Long zipcode) {
+  public void setZipcode(String zipcode) {
     this.zipcode = zipcode;
   }
 
