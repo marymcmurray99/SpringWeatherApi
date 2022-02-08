@@ -1,6 +1,5 @@
-package com.mcmurray.springweatherapi.services;
+package com.mcmurray.springweatherapi.services.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -16,10 +15,10 @@ public class CurrentWeather {
   private Double humidity;
   private Double visibility;
   private BigDecimal windSpeed;
-  private Double zipcode;
+  private Long zipcode;
 
 
-  public CurrentWeather(BigDecimal temperature, BigDecimal feelsLike, BigDecimal tempMin, BigDecimal tempMax, Double pressure, Double humidity, Double visibility, BigDecimal windSpeed, Double zipcode) {
+  public CurrentWeather(BigDecimal temperature, BigDecimal feelsLike, BigDecimal tempMin, BigDecimal tempMax, Double pressure, Double humidity, Double visibility, BigDecimal windSpeed, Long zipcode) {
     this.temperature = temperature;
     this.feelsLike = feelsLike;
     this.tempMin = tempMin;
@@ -95,11 +94,11 @@ public class CurrentWeather {
     this.windSpeed = windSpeed;
   }
 
-  public Double getZipcode() {
+  public Long getZipcode() {
     return zipcode;
   }
 
-  public void setZipcode(Double zipcode) {
+  public void setZipcode(Long zipcode) {
     this.zipcode = zipcode;
   }
 

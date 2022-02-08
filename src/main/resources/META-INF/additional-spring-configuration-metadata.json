@@ -1,15 +1,21 @@
 {
   "properties": [
     {
-      "name": "open.weather.map.api.key",
+      "name": "rapid.api.key",
       "type": "java.lang.String",
-      "description": "Description for open.weather.map.api.key.",
+      "description": "Rapid api key for api calls.",
       "sourceType": "com.mcmurray.springweatherapi.CustomProperties"
     },
     {
       "name": "api.current.weather.data",
       "type": "java.lang.String",
-      "description": "Description for api.current.weather.data.",
+      "description": "Api url for current weather data",
+      "sourceType": "com.mcmurray.springweatherapi.CustomProperties"
+    },
+    {
+      "name": "api.forcast",
+      "type": "java.lang.String",
+      "description": "API url for forcast data for 14 days.",
       "sourceType": "com.mcmurray.springweatherapi.CustomProperties"
     }
   ] }

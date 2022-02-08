@@ -8,4 +8,5 @@ import org.springframework.context.annotation.Configuration;
 public class CustomProperties {
   String openWeatherMapApiKey;
   String apiCurrentWeatherData;
+  String apiForcast;
 }
