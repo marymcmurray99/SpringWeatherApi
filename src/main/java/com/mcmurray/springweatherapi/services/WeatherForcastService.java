@@ -3,9 +3,7 @@ package com.mcmurray.springweatherapi.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mcmurray.springweatherapi.services.model.CurrentWeather;
 import com.mcmurray.springweatherapi.services.model.ForcastDay;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,12 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.URI;
 import java.util.ArrayList;
 
+/**
+ * Service to get 14 day weather forcasts.
+ */
 @Service
 public class WeatherForcastService implements WeatherService{
   private final RestTemplate restTemplate = new RestTemplate();
