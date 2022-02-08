@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,9 +30,10 @@ public class WeatherApiController {
    * @param tokenVal the bearer token
    * @return API response with weather data or error
    */
-  @GetMapping("/current-weather-data/{zipcode}/{token}")
+  @GetMapping("/current-weather-data/{zipcode}")
   public ResponseEntity<Object> getCurrentWeatherData(@PathVariable("zipcode") String zipcode,
-                                                      @PathVariable("token") String tokenVal) {
+                                                      @RequestHeader("Authorization")
+                                                              String tokenVal) {
     Token token = new Token(tokenVal);
     if (!token.isValid()) {
       return invalidTokenResponse;
@@ -50,9 +52,9 @@ public class WeatherApiController {
    * @param tokenVal the bearer token
    * @return API response with weather forcast or error
    */
-  @GetMapping("/weather-forcast/{zipcode}/{token}")
+  @GetMapping("/weather-forcast/{zipcode}")
   public ResponseEntity<Object> getWeatherForcast(@PathVariable("zipcode") String zipcode,
-                                                  @PathVariable("token") String tokenVal) {
+                                                  @RequestHeader("Authorization") String tokenVal) {
     Token token = new Token(tokenVal);
     if (!token.isValid()) {
       return invalidTokenResponse;

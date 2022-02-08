@@ -17,6 +17,6 @@ public class Token {
    * @return If the token is valid, return true, otherwise return false
    */
   public boolean isValid() {
-    return this.value.length() == 20;
+    return this.value.contains("Bearer ") && this.value.replace("Bearer ", "").length() == 20;
   }
 }

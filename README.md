@@ -4,20 +4,19 @@
 This project is a Spring Boot Java API for obtaining weather data. 
 
 ## Endpoints 
-This project has 2 endpoints that each require a 20 character token. 
+This project has 2 endpoints that each require a 20 character Bearer token. 
 
 ### Current Weather Data endpoint
 This endpoint can be reached by the url
-```/current-weather-data/{zipcode}/{token}```
+```/current-weather-data/{zipcode}```
 where
 - zipcode is the zipcode you want weather for 
-- token is your 20 character token 
-
+- the header contains Bearer token of the format ```Authorization: Bearer {20 char token}```
 ### Weather Forcast endpoint 
 This endpoint can be reached at 
-```/weather-forcast/{zipcode}/{token}``` where
+```/weather-forcast/{zipcode}``` where
 - zipcode is the zipcode you want weather for
-- token is your 20 character token 
+- the header contains Bearer token of the format ```Authorization: Bearer {20 char token}```
 
 ## Running
 

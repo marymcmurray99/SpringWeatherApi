@@ -18,4 +18,5 @@
       "description": "API url for forcast data for 14 days.",
       "sourceType": "com.mcmurray.springweatherapi.CustomProperties"
     }
-  ] }
+  ]
+}
