@@ -15,7 +15,8 @@ public class ForcastDay implements Serializable {
   private String date;
   private String zipCode;
 
-  public ForcastDay(Double minTemp, Double maxTemp, Double humidity, Double windSpeedMPH, String windDirection, String date, String zipCode) {
+  public ForcastDay(Double minTemp, Double maxTemp, Double humidity, Double windSpeedMPH,
+                    String windDirection, String date, String zipCode) {
     this.minTemp = minTemp;
     this.maxTemp = maxTemp;
     this.humidity = humidity;
@@ -86,7 +87,9 @@ public class ForcastDay implements Serializable {
     if (this == o) return true;
     if (!(o instanceof ForcastDay)) return false;
     ForcastDay that = (ForcastDay) o;
-    return minTemp.equals(that.minTemp) && maxTemp.equals(that.maxTemp) && humidity.equals(that.humidity) && windSpeedMPH.equals(that.windSpeedMPH) && windDirection.equals(that.windDirection) && date.equals(that.date) && zipCode.equals(that.zipCode);
+    return minTemp.equals(that.minTemp) && maxTemp.equals(that.maxTemp) && humidity.equals(
+            that.humidity) && windSpeedMPH.equals(that.windSpeedMPH) && windDirection.equals(
+            that.windDirection) && date.equals(that.date) && zipCode.equals(that.zipCode);
   }
 
   @Override

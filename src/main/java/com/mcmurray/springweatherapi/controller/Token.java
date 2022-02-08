@@ -13,6 +13,7 @@ public class Token {
 
   /**
    * Determines if the token is valid (20 characters in length).
+   *
    * @return If the token is valid, return true, otherwise return false
    */
   public boolean isValid() {

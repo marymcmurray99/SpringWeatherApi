@@ -18,7 +18,9 @@ public class CurrentWeather {
   private String zipcode;
 
 
-  public CurrentWeather(BigDecimal temperature, BigDecimal feelsLike, BigDecimal tempMin, BigDecimal tempMax, Double pressure, Double humidity, Double visibility, BigDecimal windSpeed, String zipcode) {
+  public CurrentWeather(BigDecimal temperature, BigDecimal feelsLike, BigDecimal tempMin,
+                        BigDecimal tempMax, Double pressure, Double humidity, Double visibility,
+                        BigDecimal windSpeed, String zipcode) {
     this.temperature = temperature;
     this.feelsLike = feelsLike;
     this.tempMin = tempMin;
@@ -107,11 +109,15 @@ public class CurrentWeather {
     if (this == o) return true;
     if (!(o instanceof CurrentWeather)) return false;
     CurrentWeather that = (CurrentWeather) o;
-    return temperature.equals(that.temperature) && feelsLike.equals(that.feelsLike) && tempMin.equals(that.tempMin) && tempMax.equals(that.tempMax) && pressure.equals(that.pressure) && humidity.equals(that.humidity) && visibility.equals(that.visibility) && windSpeed.equals(that.windSpeed) && zipcode.equals(that.zipcode);
+    return temperature.equals(that.temperature) && feelsLike.equals(that.feelsLike)
+            && tempMin.equals(that.tempMin) && tempMax.equals(that.tempMax) && pressure.equals(
+            that.pressure) && humidity.equals(that.humidity) && visibility.equals(that.visibility)
+            && windSpeed.equals(that.windSpeed) && zipcode.equals(that.zipcode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(temperature, feelsLike, tempMin, tempMax, pressure, humidity, visibility, windSpeed, zipcode);
+    return Objects.hash(temperature, feelsLike, tempMin, tempMax, pressure, humidity, visibility,
+            windSpeed, zipcode);
   }
 }

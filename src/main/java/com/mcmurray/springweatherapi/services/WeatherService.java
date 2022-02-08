@@ -8,6 +8,7 @@ public interface WeatherService {
 
   /**
    * Gets data about the weather from the given US zipcode.
+   *
    * @param zipcode US zipcode
    * @return String of the data
    */

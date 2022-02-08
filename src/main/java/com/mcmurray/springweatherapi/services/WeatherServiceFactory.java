@@ -12,10 +12,13 @@ public class WeatherServiceFactory {
   private WeatherForcastService weatherForcastService;
 
   public WeatherService getService(Services serviceType) {
-    switch(serviceType) {
-      case CurrentWeatherDataService: return currentWeatherDataService;
-      case WeatherForcastService: return weatherForcastService;
-      default: throw new RuntimeException("The request can not be completed.");
+    switch (serviceType) {
+      case CurrentWeatherDataService:
+        return currentWeatherDataService;
+      case WeatherForcastService:
+        return weatherForcastService;
+      default:
+        throw new RuntimeException("The request can not be completed.");
     }
   }
 

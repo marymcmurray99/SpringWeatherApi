@@ -18,15 +18,18 @@ import java.math.BigDecimal;
 import java.net.URI;
 
 @Service
-public class CurrentWeatherDataService implements WeatherService{
+public class CurrentWeatherDataService implements WeatherService {
   private final RestTemplate restTemplate = new RestTemplate();
   private final ObjectMapper objectMapper = new ObjectMapper();
-  @Value("${api.current.weather.data}") private String url;
-  @Value("${rapid.api.key}") private String apiKey;
+  @Value("${api.current.weather.data}")
+  private String url;
+  @Value("${rapid.api.key}")
+  private String apiKey;
 
 
   /**
    * Gets the current weather data from the given location from the api at this.url
+   *
    * @param zipcode the location we want the weather from (US zip only)
    * @return the weather data
    */
@@ -40,7 +43,7 @@ public class CurrentWeatherDataService implements WeatherService{
     URI requestUrl = new UriTemplate(this.url).expand(zipcode);
     HttpHeaders headers = new HttpHeaders();
     headers.set("x-rapidapi-key", this.apiKey);
-    HttpEntity<String> entity = new HttpEntity<>("parameters",headers);
+    HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
     return restTemplate.exchange(requestUrl, HttpMethod.GET, entity, String.class);
   }
 
@@ -48,14 +51,14 @@ public class CurrentWeatherDataService implements WeatherService{
     try {
       JsonNode root = objectMapper.readTree(response.getBody());
       return new CurrentWeather(BigDecimal.valueOf(root.path("main").path("temp").asDouble()),
-                      BigDecimal.valueOf(root.path("main").path("feels_like").asDouble()),
-                      BigDecimal.valueOf(root.path("main").path("temp_min").asDouble()),
-                      BigDecimal.valueOf(root.path("main").path("temp_max").asDouble()),
-                      root.path("main").path("pressure").asDouble(),
-                      root.path("main").path("humidity").asDouble(),
-                      root.path("visibility").asDouble(),
-                      BigDecimal.valueOf(root.path("wind").path("speed").asDouble()),
-                      zipcode);
+              BigDecimal.valueOf(root.path("main").path("feels_like").asDouble()),
+              BigDecimal.valueOf(root.path("main").path("temp_min").asDouble()),
+              BigDecimal.valueOf(root.path("main").path("temp_max").asDouble()),
+              root.path("main").path("pressure").asDouble(),
+              root.path("main").path("humidity").asDouble(),
+              root.path("visibility").asDouble(),
+              BigDecimal.valueOf(root.path("wind").path("speed").asDouble()),
+              zipcode);
     } catch (JsonProcessingException e) {
       throw new RuntimeException("Error parsing current weather data json", e);
     }

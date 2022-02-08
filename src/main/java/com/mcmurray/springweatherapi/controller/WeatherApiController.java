@@ -4,7 +4,6 @@ import com.mcmurray.springweatherapi.services.Services;
 import com.mcmurray.springweatherapi.services.WeatherService;
 import com.mcmurray.springweatherapi.services.WeatherServiceFactory;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,39 +16,49 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class WeatherApiController {
+  private static final ResponseEntity<Object> invalidTokenResponse =
+          ResponseHandler.generateResponse("Invalid token.", HttpStatus.UNAUTHORIZED, null);
   @Autowired
   private WeatherServiceFactory weatherServiceFactory;
-  private static final ResponseEntity<Object> invalidTokenResponse = ResponseHandler.generateResponse("Invalid token.", HttpStatus.UNAUTHORIZED, null);
 
   /**
-   * API call to get current weather data that expects the url format "/current-weather-data/{zipcode}/{token}".
-   * @param zipcode the zip code of the weather data
+   * API call to get current weather data that expects the url format
+   * "/current-weather-data/{zipcode}/{token}".
+   *
+   * @param zipcode  the zip code of the weather data
    * @param tokenVal the bearer token
    * @return API response with weather data or error
    */
   @GetMapping("/current-weather-data/{zipcode}/{token}")
-  public ResponseEntity<Object> getCurrentWeatherData(@PathVariable("zipcode") String zipcode, @PathVariable("token") String tokenVal) {
+  public ResponseEntity<Object> getCurrentWeatherData(@PathVariable("zipcode") String zipcode,
+                                                      @PathVariable("token") String tokenVal) {
     Token token = new Token(tokenVal);
     if (!token.isValid()) {
       return invalidTokenResponse;
     }
-    WeatherService service = this.weatherServiceFactory.getService(Services.CurrentWeatherDataService);
-    return ResponseHandler.generateResponse("Data successfully retrieved.", HttpStatus.OK, service.getData(zipcode));
+    WeatherService service =
+            this.weatherServiceFactory.getService(Services.CurrentWeatherDataService);
+    return ResponseHandler.generateResponse("Data successfully retrieved.", HttpStatus.OK,
+            service.getData(zipcode));
   }
 
   /**
-   * API call to get the weather forcast for the next 14 days that expects the format "/weather-forcast/{zipcode}/{token}".
-   * @param zipcode the zipcode for the weather forcast
+   * API call to get the weather forcast for the next 14 days that expects the format
+   * "/weather-forcast/{zipcode}/{token}".
+   *
+   * @param zipcode  the zipcode for the weather forcast
    * @param tokenVal the bearer token
    * @return API response with weather forcast or error
    */
   @GetMapping("/weather-forcast/{zipcode}/{token}")
-  public ResponseEntity<Object> getWeatherForcast(@PathVariable("zipcode") String zipcode, @PathVariable("token") String tokenVal) {
+  public ResponseEntity<Object> getWeatherForcast(@PathVariable("zipcode") String zipcode,
+                                                  @PathVariable("token") String tokenVal) {
     Token token = new Token(tokenVal);
     if (!token.isValid()) {
       return invalidTokenResponse;
     }
     WeatherService service = this.weatherServiceFactory.getService(Services.WeatherForcastService);
-    return ResponseHandler.generateResponse("Data successfully retrieved.", HttpStatus.OK, service.getData(zipcode));
-    }
+    return ResponseHandler.generateResponse("Data successfully retrieved.", HttpStatus.OK,
+            service.getData(zipcode));
   }
+}
