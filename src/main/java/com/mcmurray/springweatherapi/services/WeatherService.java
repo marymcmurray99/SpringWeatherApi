@@ -11,5 +11,5 @@ public interface WeatherService {
    * @param zipcode US zipcode
    * @return String of the data
    */
-  String getData(String zipcode);
+  Object getData(String zipcode);
 }

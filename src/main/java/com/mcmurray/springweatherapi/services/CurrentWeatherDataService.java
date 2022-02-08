@@ -1,5 +1,7 @@
 package com.mcmurray.springweatherapi.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
+import java.math.BigDecimal;
 import java.net.URI;
 
 @Service
@@ -26,18 +29,40 @@ public class CurrentWeatherDataService implements WeatherService{
    * @param zipcode the location we want the weather from (US zip only)
    * @return the weather data
    */
-  public String getData(String zipcode) {
+  public CurrentWeather getData(String zipcode) {
+    ResponseEntity<String> response = this.callWeatherApi(zipcode);
+    CurrentWeather currentWeather = this.convert(response, zipcode);
+    return currentWeather;
+    /** try {
+      return this.objectMapper.writeValueAsString(currentWeather);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException("Error parsing currentWeather object to json", e);
+    }*/
+  }
+
+  private ResponseEntity<String> callWeatherApi(String zipcode) {
     URI requestUrl = new UriTemplate(this.url).expand(zipcode);
     HttpHeaders headers = new HttpHeaders();
     headers.set("x-rapidapi-key", this.apiKey);
     HttpEntity<String> entity = new HttpEntity<>("paramters",headers);
-    ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.GET, entity, String.class);
-    return this.convert(response);
+    return restTemplate.exchange(requestUrl, HttpMethod.GET, entity, String.class);
   }
 
-  private String convert(ResponseEntity<String> response) {
-    //object mapper will be used here
-    return response.toString();
+  private CurrentWeather convert(ResponseEntity<String> response, String zipcode) {
+    try {
+      JsonNode root = objectMapper.readTree(response.getBody());
+      return new CurrentWeather(BigDecimal.valueOf(root.path("main").path("temp").asDouble()),
+                      BigDecimal.valueOf(root.path("main").path("feels_like").asDouble()),
+                      BigDecimal.valueOf(root.path("main").path("temp_min").asDouble()),
+                      BigDecimal.valueOf(root.path("main").path("temp_max").asDouble()),
+                      root.path("main").path("pressure").asDouble(),
+                      root.path("main").path("humidity").asDouble(),
+                      root.path("visibility").asDouble(),
+                      BigDecimal.valueOf(root.path("wind").path("speed").asDouble()),
+                      Double.valueOf(zipcode));
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException("Error parsing current weather data json", e);
+    }
   }
 
 }
